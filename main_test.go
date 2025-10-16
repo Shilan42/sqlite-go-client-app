@@ -11,7 +11,10 @@ func TestInsertUpdateDelete(t *testing.T) {
 	// prepare
 	db, err := sql.Open("sqlite", "demo.db")
 	require.NoError(t, err)
-	defer db.Close()
+
+	defer func() {
+		_ = db.Close()
+	}()
 
 	newClient := Client{
 		FIO:      "TEST",

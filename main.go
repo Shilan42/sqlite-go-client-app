@@ -30,7 +30,10 @@ func main() {
 		fmt.Println(err)
 		return
 	}
-	defer db.Close()
+
+	defer func() {
+		_ = db.Close()
+	}()
 
 	// добавление нового клиента
 	newClient := Client{
